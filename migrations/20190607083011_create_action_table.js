@@ -4,13 +4,17 @@ exports.up = function(knex, Promise) {
     table
       .integer('project_id')
       .unsigned()
+      .notNullable()
       .references('id')
       .inTable('projects')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
     table.string('description').notNullable();
     table.string('notes');
-    table.boolean('completed').notNullable();
+    table
+      .boolean('completed')
+      .defaultTo(false)
+      .notNullable();
   });
 };
 

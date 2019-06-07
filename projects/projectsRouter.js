@@ -46,7 +46,6 @@ router.post('/actions', (req, res) => {
 router.get('/:id/actions', (req, res) => {
   Project.getProjectActions(req.params.id)
     .then(projects => {
-      console.log(projects);
       res.status(200).json(projects);
     })
     .catch(err => {

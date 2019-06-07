@@ -27,7 +27,18 @@ function addAction(action) {
 }
 
 function getProjectActions(id) {
-  return db
-    .from('projects')
-    .join('actions', 'projects.id', 'actions.project_id');
+  return db('projects')
+    .where({ id })
+    .first()
+    .then(project => {
+      return db('actions')
+        .where('project_id', id)
+        .then(actions => {
+          console.log(actions);
+          return {
+            ...project,
+            actions
+          };
+        });
+    });
 }
