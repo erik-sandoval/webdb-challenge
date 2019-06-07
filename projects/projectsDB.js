@@ -23,11 +23,11 @@ function add(project) {
 }
 
 function addAction(action) {
-  return db('actions').insert(project);
+  return db('actions').insert(action);
 }
 
 function getProjectActions(id) {
-  return db('projects').innerJoin('actions', function() {
-    this.on('projects.id', '=', 'actions.project_id');
-  });
+  return db
+    .from('projects')
+    .join('actions', 'projects.id', 'actions.project_id');
 }
